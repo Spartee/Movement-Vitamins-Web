@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="user-profile">
+  <div class="page-header">
+    <h2>{{ recipe.recipe_title }}
+      {% if recipe.dairy_free_recipe %}
+        <span class="label label-info" style="font-size:12px;">Dairy-Free</span>
+      {% endif %}
+      {% if recipe.soy_free_recipe %}
+        <span class="label label-success" style="font-size:12px;">Soy-Free</span>
+      {% endif %}
+    </h2>
+    <h5>
+      {% if recipe.user_id == current_user.id %}
+        <a href="{{ url_for('recipes.edit_recipe', recipe_id=recipe.id) }}">Edit</a>
+        |
+        <a href="{{ url_for('recipes.delete_recipe', recipe_id=recipe.id) }}">Delete</a>
+      {% endif %}
+    </h5>
+  </div>
+
+
+  <div class="row">
+    <div class="col-xs-6 col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Recipe Details</div>
+        <div class="panel-body"><b>Description:</b> {{ recipe.recipe_description }}</div>
+        <div class="panel-body"><b>Public or Private:</b>
+          {% if recipe.is_public %}
+            Public
+          {% else %}
+            Private
+          {% endif %}
+        </div>
+        <div class="panel-body"><b>Recipe Type:</b> {{ recipe.recipe_type }}</div>
+        <div class="panel-body"><b>Rating (1-worst to 10-best):</b> {{ recipe.rating }}</div>
+        <div class="panel-body"><b>Inspiration:</b> {{ recipe.inspiration }}</div>
+      </div>
+   </div>
+
+    <div class="col-xs-6 col-md-8">
+      {% if recipe.image_url %}
+        <img class="center-block img-responsive" src="{{ recipe.image_url }}" alt="{{ recipe.image_filename }}" style="width:600px;height:450px;margin-bottom:10px">
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Ingredients</div>
+        <div class="panel-body">
+          {{ recipe.ingredients_html | safe }}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Recipe Steps</div>
+        <div class="panel-body">
+          {{ recipe.recipe_steps_html | safe }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>`
+
+{% endblock %}

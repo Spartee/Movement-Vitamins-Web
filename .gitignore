@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Mac custom attributes file (Desktop Service Store)
+.DS_Store
+
+# PyCharm files
+.idea/
+
+# Instance Folder - used for configuration parameters
+/web/instance/db_create_full.py
+/web/instance/flask_full.cfg
+/web/instance/*.db
+
+# Initialization file for Postgress Docker Image
+/postgresql/Dockerfile
+
+# Coverage output
+/web/.coverage
+/web/htmlcov/
