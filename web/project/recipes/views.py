@@ -242,28 +242,3 @@ def edit_recipe(recipe_id):
     return render_template('edit_recipe.html', form=form, recipe=recipe)
 
 
-@recipes_blueprint.route('/whats_for_dinner')
-@login_required
-def whats_for_dinner():
-    dinner_recipe_found = True
-    dinner_takeout_recommendation = False
-    dinner_recipe = None
-    dinner_recipes = Recipe.query.filter_by(recipe_type='Dinner').all()
-
-    if len(dinner_recipes) > 0:
-        proposed_index = int((random() * 1000) % len(dinner_recipes))
-
-        if len(dinner_recipes) < 8:
-            dinner_recipe = dinner_recipes[proposed_index]
-        else:
-            if proposed_index % 8 == 0:
-                dinner_takeout_recommendation = True
-            else:
-                dinner_recipe = dinner_recipes[proposed_index]
-    else:
-        dinner_recipe_found = False
-
-    return render_template('whats_for_dinner.html',
-                           recipe_found=dinner_recipe_found,
-                           takeout_recommendation=dinner_takeout_recommendation,
-                           recipe=dinner_recipe)

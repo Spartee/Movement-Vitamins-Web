@@ -21,8 +21,13 @@ The web interface for the Movement Vitamins application.
 
 - % docker-compose run --rm web python ./instance/db_create.py
 
-Go to your favorite web browser and open:
-    http://192.168.99.100:5000  $ Check the IP address using 'docker-machine ip'
+
+To view in the web run
+
+- % docker container ls
+
+and then type the address of the flask app into a web browser of your choosing
+
 
 ## Key Python Modules Used
 
@@ -44,3 +49,14 @@ Docker is the recommended tool for running in development and production.
 In the top-level folder:
     % nose2
 
+
+## TODO
+
+ - create models for database in web/project/models.py
+ - create a script for creating postgresDB in web/instance/create_db.py
+ - change API to give and take user movement vitamin data
+ - remove recipe templates and add in davids templates
+ - create superuser and superuser views (for Cory) (change admin view)
+ - change add_recipe to add new user (for cory)
+ - have Justin create banners for site header and logo
+ 
