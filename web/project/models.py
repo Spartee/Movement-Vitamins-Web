@@ -15,55 +15,42 @@ allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
 
 class ValidationError(ValueError):
     """Class for handling validation errors during
-       import of recipe data via API
+       import of movement screening data via API
     """
     pass
 
 
-class Recipe(db.Model):
-    """Recipe fields to add:
-        date last modified
-    """
-    __tablename__ = "recipes"
+class Vitamins(db.Model):
+
+    """Movment Screening Data"""
+    __tablename__ = "vitamins"
 
     id = db.Column(db.Integer, primary_key=True)
-    recipe_title = db.Column(db.String, nullable=True)
-    recipe_description = db.Column(db.String, nullable=True)
-    is_public = db.Column(db.Boolean, nullable=True)
-    image_filename = db.Column(db.String, default=None, nullable=True)
-    image_url = db.Column(db.String, default=None, nullable=True)
-    recipe_type = db.Column(db.String, default=None, nullable=True)
-    rating = db.Column(db.Integer, default=None, nullable=True)
-    ingredients = db.Column(db.Text, default=None, nullable=True)
-    ingredients_html = db.Column(db.Text, default=None, nullable=True)
-    recipe_steps = db.Column(db.Text, default=None, nullable=True)
-    recipe_steps_html = db.Column(db.Text, default=None, nullable=True)
-    inspiration = db.Column(db.String, default=None, nullable=True)
-    dairy_free_recipe = db.Column(db.Boolean, nullable=True)
-    soy_free_recipe = db.Column(db.Boolean, nullable=True)
-    date_created = db.Column(db.DateTime, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    shoulder_rotation = db.Column(db.Boolean, nullable=True)
+    shoulder_flextion = db.Column(db.Boolean, nullable=True)
+    ankle_mobility = db.Column(db.Boolean, nullable=True)
+    supine_squat = db.Column(db.Boolean, nullable=True)
+    leg_raise = db.Column(db.Boolean, nullable=True)
+    overhead_squat = db.Column(db.Boolean, nullable=True)
+    arms_extended_squat = db.Column(db.Boolean, nullable=True)
+    foot_collapse = db.Column(db.Boolean, nullable=True)
 
-    def __init__(self, title=None, description=None, user_id=None, is_public=False, image_filename=None, image_url=None,
-                 recipe_type=None, rating=None, ingredients=None, recipe_steps=None, inspiration=None,
-                 dairy_free_recipe=False, soy_free_recipe=False, date_created=None):
-        self.recipe_title = title
-        self.recipe_description = description
-        self.is_public = is_public
-        self.image_filename = image_filename
-        self.image_url = image_url
-        self.recipe_type = recipe_type
-        self.rating = rating
-        self.ingredients = ingredients
-        self.recipe_steps = recipe_steps
-        self.inspiration = inspiration
-        self.dairy_free_recipe = dairy_free_recipe
-        self.soy_free_recipe = soy_free_recipe
-        self.date_created = date_created
+    def __init__(self, user_id, shoulder_flextion, shoulder_rotation, ankle_mobility, supine_squat,
+                 leg_raise, overhead_squat, arms_extended_squat, foot_collapse):
         self.user_id = user_id
+        self.shoulder_flextion = shoulder_flextion
+        self.shoulder_rotation = shoulder_rotation
+        self.ankle_mobility = ankle_mobility
+        self.supine_squat = supine_squat
+        self.leg_raise = leg_raise
+        self.overhead_squat = overhead_squat
+        self.arms_extended_squat = arms_extended_squat
+        self.foot_collapse = foot_collapse
+
 
     def __repr__(self):
-        return '<id: {}, title: {}, user_id: {}>'.format(self.id, self.recipe_title, self.user_id)
+        return '<id: {}, user_id: {}>'.format(self.id, self.user_id)
 
     def get_url(self):
         return url_for('recipes_api.api1_2_get_recipe', recipe_id=self.id, _external=True)
@@ -71,63 +58,32 @@ class Recipe(db.Model):
     def export_data(self):
         return {
             'self_url': self.get_url(),
-            'title': self.recipe_title,
-            'description': self.recipe_description,
-            'public': self.is_public,
-            'image_filename': self.image_filename,
-            'image_url': self.image_url,
-            'recipe_type': self.recipe_type,
-            'rating': self.rating,
-            'ingredients': self.ingredients,
-            'recipe_steps': self.recipe_steps,
-            'inspiration': self.inspiration,
-            'dairy_free_recipe': self.dairy_free_recipe,
-            'soy_free_recipe': self.soy_free_recipe,
+            'shoulder_rotation': self.shoulder_rotation,
+            'shoulder_flextion': self.shoulder_flextion,
+            'ankle_mobility': self.ankle_mobility,
+            'supine_squat': self.supine_squat,
+            'leg_raise': self.leg_raise,
+            'overhead_squat': self.overhead_squat,
+            'arms_extended_squat': self.arms_extended_squat,
+            'foot_collapse': self.foot_collapse,
             'user_id': self.user_id
         }
 
     def import_data(self, request):
-        """Import the data for this recipe by either saving the image associated
-        with this recipe or saving the metadata associated with the recipe. If
-        the metadata is being processed, the title and description of the recipe
-        must always be specified."""
+        """Import the data for this users vitamins"""
         try:
-            if 'recipe_image' in request.files:
-                filename = images.save(request.files['recipe_image'])
-                self.image_filename = filename
-                self.image_url = images.url(filename)
-            else:
-                json_data = request.get_json()
-                self.recipe_title = json_data['title']
-                self.recipe_description = json_data['description']
-                if 'recipe_type' in json_data:
-                    self.recipe_type = json_data['recipe_type']
-                if 'rating' in json_data:
-                    self.rating = json_data['rating']
-                if 'ingredients' in json_data:
-                    self.ingredients = json_data['ingredients']
-                if 'recipe_steps' in json_data:
-                    self.recipe_steps = json_data['recipe_steps']
-                if 'inspiration' in json_data:
-                    self.inspiration = json_data['inspiration']
+            json_data = request.get_json()
+            self.shoulder_rotation = json_data['shoulder_rotation']
+            self.shoulder_flextion = json_data['shoulder_flextion']
+            self.ankle_mobility = json_data['ankle_mobility']
+            self.foot_collapse = json_data['foot_collapse']
+            self.arms_extended_squat = json_data['arms_overhead_squat']
+            self.overhead_squat = json_data['overhead_squat']
+            self.leg_raise = json_data['leg_raise']
+            self.supine_squat = json_data['supine_squat']
         except KeyError as e:
             raise ValidationError('Invalid recipe: missing ' + e.args[0])
         return self
-
-    @staticmethod
-    def on_changed_ingredients(target, value, oldvalue, iterator):
-        if value:
-            target.ingredients_html = bleach.linkify(bleach.clean(markdown(value, output_format='html'),
-                                                                  tags=allowed_tags, strip=True))
-
-    @staticmethod
-    def on_changed_recipe_steps(target, value, oldvalue, iterator):
-        if value:
-            target.recipe_steps_html = bleach.linkify(bleach.clean(markdown(value, output_format='html'),
-                                                                   tags=allowed_tags, strip=True))
-
-db.event.listen(Recipe.ingredients, 'set', Recipe.on_changed_ingredients)
-db.event.listen(Recipe.recipe_steps, 'set', Recipe.on_changed_recipe_steps)
 
 
 class User(db.Model):
@@ -145,7 +101,7 @@ class User(db.Model):
     last_logged_in = db.Column(db.DateTime, nullable=True)
     current_logged_in = db.Column(db.DateTime, nullable=True)
     role = db.Column(db.String, default='user')
-    recipes = db.relationship('Recipe', backref='user', lazy='dynamic')
+    screen_data = db.relationship('vitamins', backref='user', lazy='dynamic')
 
     def __init__(self, email, plaintext_password, email_confirmation_sent_on=None, role='user'):
         self.email = email
