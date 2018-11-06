@@ -20,7 +20,7 @@ class ValidationError(ValueError):
     pass
 
 
-class Vitamins(db.Model):
+class Vitamin(db.Model):
 
     """Movment Screening Data"""
     __tablename__ = "vitamins"

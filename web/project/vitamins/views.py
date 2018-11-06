@@ -8,7 +8,7 @@ from flask import render_template, Blueprint, request, redirect, url_for, flash,
 from flask_login import current_user, login_required
 from project import db, images, app
 from project.models import Recipe, User
-from .forms import AddRecipeForm, EditRecipeForm
+from .forms import AddVitaminsForm, EditVitaminsForm
 from random import random
 from twilio.rest import TwilioRestClient
 
@@ -17,8 +17,8 @@ from twilio.rest import TwilioRestClient
 #### config ####
 ################
 
-recipes_blueprint = Blueprint('recipes', __name__)
-
+vitamins_blueprint = Blueprint('vitamins', __name__)
+"""TODO: change this views to reflect forms created in this folder"""
 
 ##########################
 #### helper functions ####
