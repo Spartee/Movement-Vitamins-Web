@@ -53,18 +53,18 @@ def send_new_recipe_text_message(user_email, recipe_title):
 #### routes ####
 ################
 
-@recipes_blueprint.route('/')
+@vitamins_blueprint.route('/')
 def public_recipes():
     all_public_recipes = Recipe.query.filter(Recipe.is_public == True, Recipe.image_url != None).order_by(Recipe.rating.desc()).limit(4)
     return render_template('public_recipes.html', public_recipes=all_public_recipes)
 
 
-@recipes_blueprint.route('/abc')
+@vitamins_blueprint.route('/abc')
 def public_recipes2():
     return '<h1>Hello world!</h1>'
 
 
-@recipes_blueprint.route('/recipes/<recipe_type>')
+@vitamins_blueprint.route('/recipes/<recipe_type>')
 def user_recipes(recipe_type='All'):
     if recipe_type in ['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Side Dish', 'Drink']:
         if current_user.is_authenticated:
@@ -84,7 +84,7 @@ def user_recipes(recipe_type='All'):
     return redirect(url_for('recipes.public_recipes'))
 
 
-@recipes_blueprint.route('/add', methods=['GET', 'POST'])
+@vitamins_blueprint.route('/add', methods=['GET', 'POST'])
 @login_required
 def add_recipe():
     # Cannot pass in 'request.form' to AddRecipeForm constructor, as this will cause 'request.files' to not be
@@ -122,7 +122,7 @@ def add_recipe():
     return render_template('add_recipe.html', form=form)
 
 
-@recipes_blueprint.route('/recipe/<recipe_id>')
+@vitamins_blueprint.route('/recipe/<recipe_id>')
 def recipe_details(recipe_id):
     # recipe_with_user = db.session.query(Recipe, User).join(User).filter(Recipe.id == recipe_id).first_or_404()
     recipe = Recipe.query.filter_by(id=recipe_id).first_or_404()
@@ -138,7 +138,7 @@ def recipe_details(recipe_id):
     return redirect(url_for('recipes.public_recipes'))
 
 
-@recipes_blueprint.route('/delete/<recipe_id>')
+@vitamins_blueprint.route('/delete/<recipe_id>')
 @login_required
 def delete_recipe(recipe_id):
     recipe = Recipe.query.filter_by(id=recipe_id).first_or_404()
@@ -153,7 +153,7 @@ def delete_recipe(recipe_id):
     return redirect(url_for('recipes.user_recipes', recipe_type='All'))
 
 
-@recipes_blueprint.route('/edit/<recipe_id>', methods=['GET', 'POST'])
+@vitamins_blueprint.route('/edit/<recipe_id>', methods=['GET', 'POST'])
 @login_required
 def edit_recipe(recipe_id):
     # Cannot pass in 'request.form' to AddRecipeForm constructor, as this will cause 'request.files' to not be
