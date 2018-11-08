@@ -1,4 +1,4 @@
-# project/recipes/views.py
+# project/vitamins/views.py
 
 #################
 #### imports ####
@@ -7,7 +7,7 @@
 from flask import render_template, Blueprint, request, redirect, url_for, flash, abort, jsonify
 from flask_login import current_user, login_required
 from project import db, images, app
-from project.models import Recipe, User
+from project.models import Vitamin, User
 from .forms import AddVitaminsForm, EditVitaminsForm
 from random import random
 from twilio.rest import TwilioRestClient
