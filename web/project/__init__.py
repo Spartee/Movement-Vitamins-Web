@@ -54,13 +54,13 @@ def load_user(user_id):
 ####################
 
 from project.users.views import users_blueprint
-from project.recipes.views import recipes_blueprint
-from project.recipes_api.views import recipes_api_blueprint
+from project.vitamins.views import vitamins_blueprint
+from project.vitamins_api.views import vitamins_api_blueprint
 
 # register the blueprints
 app.register_blueprint(users_blueprint)
-app.register_blueprint(recipes_blueprint)
-app.register_blueprint(recipes_api_blueprint)
+app.register_blueprint(vitamins_blueprint)
+app.register_blueprint(vitamins_api_blueprint)
 
 
 ############################
