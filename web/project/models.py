@@ -19,11 +19,37 @@ class ValidationError(ValueError):
     """
     pass
 
-
 class Vitamin(db.Model):
+    """Suggested exercises """
+
+    __tablename__ = "vitamin"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    mobility = db.Column(db.Boolean)
+    stability = db.Column(db.Boolean)
+    target_area = db.Column(db.String)
+    description = db.Column(db.String)
+    link = db.Column(db.String)
+
+    def __init__(self, name, mobility, stability, target_area, description, link):
+        self.name = name
+        self.mobility = mobility
+        self.stability = stability
+        self.target_area = target_area
+        self.description = description
+        self.link = link
+
+    def __repr__(self):
+        return '<id: {}, name: {}, description: {}>'.format(self.id,
+                                                            self.name,
+                                                            self.description)
+
+
+class Screening(db.Model):
 
     """Movment Screening Data"""
-    __tablename__ = "vitamins"
+    __tablename__ = "screening"
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -82,7 +108,7 @@ class Vitamin(db.Model):
             self.leg_raise = json_data['leg_raise']
             self.supine_squat = json_data['supine_squat']
         except KeyError as e:
-            raise ValidationError('Invalid recipe: missing ' + e.args[0])
+            raise ValidationError('Invalid screening: missing ' + e.args[0])
         return self
 
 
@@ -101,7 +127,7 @@ class User(db.Model):
     last_logged_in = db.Column(db.DateTime, nullable=True)
     current_logged_in = db.Column(db.DateTime, nullable=True)
     role = db.Column(db.String, default='user')
-    screen_data = db.relationship('vitamins', backref='user', lazy='dynamic')
+    screen_data = db.relationship(Screening, backref='user', lazy='dynamic')
 
     def __init__(self, email, plaintext_password, email_confirmation_sent_on=None, role='user'):
         self.email = email
