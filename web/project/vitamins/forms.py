@@ -8,6 +8,8 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_pagedown.fields import PageDownField
 from project import images
 
+"""TODO: write these forms to allow cory to edit vitamins in application"""
+
 
 class AddVitaminsForm(Form):
     """TODO: finish this form"""

@@ -1,0 +1,33 @@
+{% extends "layout.html" %} {% block content %}
+
+<div class="user-recipes">
+    <div class="page-header">
+        <h2>Vitamins</h2>
+    </div>
+
+    <div class="container">
+        {% if all_vitamins.count() == 0 %}
+        <h5>No vitamins have been created!</h5>
+        {% else %}
+        <ul class="media-list">
+            {% for vitamin in all_vitamins %}
+            <li class="media">
+                <div class="media-left">
+                    <a class="media-left" href="{{ url_for('vitamins.vitamin_details', vitamin_id=vitamin.id) }}">
+                        <img class="media-object" src="{{ vitamin.link}}" style="width:64;height:64px;">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <a href="{{ url_for('vitamins.vitamin_details',vitamin_id=vitamin.id) }}">{{ vitamin.name }}</a>
+                    </h4>
+                    {{ vitamin.description }}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
