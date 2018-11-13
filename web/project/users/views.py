@@ -81,17 +81,6 @@ def send_password_reset_email(user_email):
     send_email('Password Reset Requested', [user_email], html)
 
 
-def send_new_user_text_message(new_user_email):
-    client = TwilioRestClient(app.config['ACCOUNT_SID'], app.config['AUTH_TOKEN'])
-    message = client.messages.create(
-        body="Kennedy Family Recipes... new user registered: {}".format(new_user_email),  # Message body, if any
-        to=app.config['ADMIN_PHONE_NUMBER'],
-        from_=app.config['TWILIO_PHONE_NUMBER']
-    )
-    # flash('Text message sent to {}: {}'.format(app.config['ADMIN_PHONE_NUMBER'], message.body), 'success')
-    return
-
-
 ################
 #### routes ####
 ################
@@ -111,7 +100,7 @@ def register():
                 if 'ACCOUNT_SID' in app.config and not app.config['TESTING']:
                     send_new_user_text_message(new_user.email)
                 flash('Thanks for registering!  Please check your email to confirm your email address.', 'success')
-                return redirect(url_for('recipes.user_recipes', recipe_type='All'))
+                return redirect(url_for('vitamins.home_page', recipe_type='All'))
             except IntegrityError:
                 db.session.rollback()
                 flash('ERROR! Email ({}) already exists.'.format(form.email.data), 'error')
@@ -132,7 +121,7 @@ def login():
                 db.session.commit()
                 login_user(user)
                 flash('Thanks for logging in, {}'.format(current_user.email))
-                return redirect(url_for('recipes.user_recipes', recipe_type='All'))
+                return redirect(url_for('vitamins.home_page', recipe_type='All'))
             else:
                 flash('ERROR! Incorrect login credentials.', 'error')
     return render_template('login.html', form=form)
@@ -170,7 +159,7 @@ def confirm_email(token):
         db.session.commit()
         flash('Thank you for confirming your email address!', 'success')
 
-    return redirect(url_for('recipes.public_recipes'))
+    return redirect(url_for('vitamins.home_page'))
 
 
 @users_blueprint.route('/reset', methods=["GET", "POST"])
@@ -278,14 +267,3 @@ def resend_email_confirmation():
         flash('Error!  Unable to send email to confirm your email address.', 'error')
 
     return redirect(url_for('users.user_profile'))
-
-
-@users_blueprint.route('/admin_view_users')
-@login_required
-def admin_view_users():
-    if current_user.role != 'admin':
-        abort(403)
-    else:
-        users = User.query.order_by(User.id).all()
-        return render_template('admin_view_users.html', users=users)
-    return redirect(url_for('users.login'))
