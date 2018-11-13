@@ -22,8 +22,8 @@ path = getcwd() + "/instance/MovementVitamins.csv"
 vitamins_db = pd.read_csv(path)
 vitamins = []
 for index, row in vitamins_db.iterrows():
-    v = Vitamin(row["name"], row["mobility"], row["stability"],
-                      row["target_area"], row["description"], row["link"])
+    v = Vitamin(row["Name"], row["Mobility"], row["Stability"],
+                      row["Target Area"], row["Description"], row["YouTube Link"])
     vitamins.append(v)
 
 # Drop all of the existing database tables

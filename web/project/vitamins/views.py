@@ -40,21 +40,21 @@ def flash_errors(form):
 
 @vitamins_blueprint.route('/')
 def home_page():
-    public_vitamins = Vitamin.query().limit(4)
+    public_vitamins = Vitamin.query.filter((Vitamin.link != "")).limit(4)
     return render_template('home_page.html', public_vitamins=public_vitamins)
 
 @vitamins_blueprint.route('/vitamins/<target_area>')
 def all_vitamins(target_area='All'):
-    if target_area in ['Hips', 'Ankles', 'Shoulder Flextion', 'Shoulder Rotation', 'Foot/Ankle', 'Upper Body']:
+    if target_area in ['Hips', 'Ankle', 'Shoulder Flexion', 'Shoulder Rotation', 'Foot', 'Upper Body']:
         my_vitamins = Vitamin.query.filter((Vitamin.target_area == target_area))
-        return render_template('all_vitamins.html', user_vitamins=my_vitamins, target_area=target_area)
+        return render_template('all_vitamins.html', all_vitamins=my_vitamins, target_area=target_area)
     elif target_area == 'All':
-        my_vitamins = Vitamin.query()
-        return render_template('all_vitamins.html', user_vitamins=my_vitamins, target_area=target_area)
+        my_vitamins = Vitamin.query.filter((Vitamin.target_area != ""))
+        return render_template('all_vitamins.html', all_vitamins=my_vitamins, target_area=target_area)
     else:
         flash('ERROR! Invalid target area selected.', 'error')
 
-    return redirect(url_for('vitamins.home_page.html'))
+    return redirect(url_for('vitamins.home_page'))
 
 
 @vitamins_blueprint.route('/vitamins/<vitamin_id>')

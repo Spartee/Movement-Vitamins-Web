@@ -57,7 +57,7 @@ class Screening(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     shoulder_rotation = db.Column(db.Boolean, nullable=True)
-    shoulder_flextion = db.Column(db.Boolean, nullable=True)
+    shoulder_flexion = db.Column(db.Boolean, nullable=True)
     ankle_mobility = db.Column(db.Boolean, nullable=True)
     supine_squat = db.Column(db.Boolean, nullable=True)
     leg_raise = db.Column(db.Boolean, nullable=True)
@@ -68,7 +68,7 @@ class Screening(db.Model):
     def __init__(self, user_id, shoulder_flextion, shoulder_rotation, ankle_mobility, supine_squat,
                  leg_raise, overhead_squat, arms_extended_squat, foot_collapse):
         self.user_id = user_id
-        self.shoulder_flextion = shoulder_flextion
+        self.shoulder_flexion = shoulder_flextion
         self.shoulder_rotation = shoulder_rotation
         self.ankle_mobility = ankle_mobility
         self.supine_squat = supine_squat
@@ -86,7 +86,7 @@ class Screening(db.Model):
         return {
             'self_url': self.get_url(),
             'shoulder_rotation': self.shoulder_rotation,
-            'shoulder_flextion': self.shoulder_flextion,
+            'shoulder_flextion': self.shoulder_flexion,
             'ankle_mobility': self.ankle_mobility,
             'supine_squat': self.supine_squat,
             'leg_raise': self.leg_raise,
@@ -101,7 +101,7 @@ class Screening(db.Model):
         try:
             json_data = request.get_json()
             self.shoulder_rotation = json_data['shoulder_rotation']
-            self.shoulder_flextion = json_data['shoulder_flextion']
+            self.shoulder_flexion = json_data['shoulder_flexion']
             self.ankle_mobility = json_data['ankle_mobility']
             self.foot_collapse = json_data['foot_collapse']
             self.arms_extended_squat = json_data['arms_overhead_squat']
