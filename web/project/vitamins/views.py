@@ -18,7 +18,7 @@ from twilio.rest import TwilioRestClient
 ################
 
 vitamins_blueprint = Blueprint('vitamins', __name__)
-"""TODO: change this views to reflect forms created in this folder"""
+
 
 ##########################
 #### helper functions ####
@@ -57,7 +57,7 @@ def all_vitamins(target_area='All'):
     return redirect(url_for('vitamins.home_page'))
 
 
-@vitamins_blueprint.route('/vitamins/<vitamin_id>')
+@vitamins_blueprint.route('/vitamin/<vitamin_id>')
 def vitamin_details(vitamin_id):
     
     vitamin = Vitamin.query.filter_by(id=vitamin_id).first_or_404()

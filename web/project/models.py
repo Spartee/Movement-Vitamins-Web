@@ -48,6 +48,17 @@ class Vitamin(db.Model):
     def get_url(self):
         return url_for('vitamins_api.api_1_get_vitamin', vitamin_id=self.id, _external=True)
 
+    def export_data(self):
+        return {
+            'name': self.name,
+            'self_url': self.get_url,
+            'Mobility': self.mobility,
+            'Stability': self.stability,
+            'Target Area': self.target_area,
+            'Description': self.description,
+            'Link': self.link
+        }
+
 
 class Screening(db.Model):
 

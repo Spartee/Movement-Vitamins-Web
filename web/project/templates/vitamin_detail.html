@@ -19,12 +19,14 @@
                 <div class="panel-body"><b>Mobility Vitamin</b></div>
                 {% else %}
                 <div class="panel-body"><b>Stability Vitamin</b></div>
+                {% endif %}
             </div>
         </div>
 
         <div class="col-xs-6 col-md-8">
             {% if vitamin.link %}
-            <img class="center-block img-responsive" src="{{ vitamin.link }}" style="width:600px;height:450px;margin-bottom:10px"> {% endif %}
+            <iframe class="center-block img-responsive" src="{{ vitamin.link }}" style="width:600px;height:450px;margin-bottom:10px"> 
+                </iframe> {% endif %}
         </div>
     </div>
 </div>` {% endblock %}

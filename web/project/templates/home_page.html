@@ -15,7 +15,7 @@
                 <tr>
                     <td>{{ vitamin.name }}</td>
                     <a href="{{ url_for('vitamins.vitamin_details', vitamin_id=vitamin.id) }}" class="thumbnail">
-                        <img src="{{ vitamin.link }}">
+                        <iframe src="{{ vitamin.link }}"></iframe>
                     </a>
                 </tr>
             </div>
