@@ -1,45 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <meta name="description" content="Movement Vitamins">
-    <meta name="author" content="Haverford College">
+    <meta name="author" content="Movement Vitamins Team">
+
     <title>Movement Vitamins</title>
     <!-- styles -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-  </head>
+</head>
 
-  <body>
+<body>
 
     <!-- Static navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+        <div class="container">
 
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#recipes-navbar-collapse-1" aria-expanded="false">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#vitamins-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+              
           <a class="navbar-brand" href="{{ url_for('vitamins.home_page') }}">Movement Vitamins</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="recipes-navbar-collapse-1">
           <ul class="nav navbar-nav">
+              <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">vitamins<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="{{ url_for('vitamins.all_vitamins', target_area='shoulder') }}">Shoulder</a></li>
+                      <li><a href="{{ url_for('vitamins.all_vitamins', target_area='hips') }}">Hips</a></li>
+                      <li><a href="{{ url_for('vitamins.all_vitamins', target_area='abs') }}">Abs</a></li>
+                      <li><a href="{{ url_for('vitamins.all_vitamins', target_area='neck') }}">Neck</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="{{ url_for('vitamins.all_vitamins', target_area='All') }}">All vitamins</a></li>
+                  </ul>
+              </li>
             {% if current_user.is_authenticated %}
               {% if current_user.role == "admin" %}
               <li><a href="{{ url_for('vitamins.movement_screenings_admin') }}">Movement Screenings</a></li>
               {% else %}
               <li><a href="{{ url_for('vitamins.movement_screening') }}">Movement Screening</a></li>
               {% endif %}
-              <li><a href="{{ url_for('users.user_profile') }}">User Profile</a></li>
-              <li><a href="{{ url_for('users.logout') }}">Log Out</a></li>
             {% else %}
               <li><a href="{{ url_for('users.register') }}">Register</a></li>
               <li><a href="{{ url_for('users.login') }}">Log In</a></li>
@@ -47,7 +60,8 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if current_user.is_authenticated %}
-              <li><a href="{{ url_for('users.user_profile') }}">{{current_user.email}}</a></li>
+              <li><a href="{{ url_for('users.user_profile') }}">User Profile</a></li>
+              <li><a href="{{ url_for('users.logout') }}">Log Out</a></li>
             {% else %}
               <li><a href="#">Welcome!</a></li>
             {% endif %}
@@ -57,39 +71,37 @@
     </nav>
 
     <div class="container">
-      <div class="content">
+        <div class="content">
 
-        <!-- flash messages -->
-        {% for error_message in get_flashed_messages(category_filter=["error"]) %}
-          <div class="alert alert-danger alert-dismissible">{{ error_message }}</div>
-        {% endfor %}
+            <!-- flash messages -->
+            {% for error_message in get_flashed_messages(category_filter=["error"]) %}
+            <div class="alert alert-danger alert-dismissible">{{ error_message }}</div>
+            {% endfor %} {% for success_message in get_flashed_messages(category_filter=["success"]) %}
+            <div class="alert alert-success alert-dismissible">{{ success_message }}</div>
+            {% endfor %} {% for info_message in get_flashed_messages(category_filter=["info"]) %}
+            <div class="alert alert-info alert-dismissible">{{ info_message }}</div>
+            {% endfor %}
 
-        {% for success_message in get_flashed_messages(category_filter=["success"]) %}
-          <div class="alert alert-success alert-dismissible">{{ success_message }}</div>
-        {% endfor %}
-
-        {% for info_message in get_flashed_messages(category_filter=["info"]) %}
-          <div class="alert alert-info alert-dismissible">{{ info_message }}</div>
-        {% endfor %}
-
-<!--
+            <!--
         {% for debug_message in get_flashed_messages(category_filter=["debug"]) %}
           <div class="alert alert-info alert-dismissible">{{ debug_message }}</div>
         {% endfor %}
--->
-        <!-- child template -->
-        {% block content %}
-        {% endblock %}
+            <!-- child template -->
+            {% block content %} {% endblock %}
 
-      </div>
-      <div class="footer">
-        <hr>
-        <p>Haverford College - 2018</p>
-      </div>
-    </div><!-- /.container -->
+
+        </div>
+        <div class="footer">
+            <hr>
+            <p>Momement Vitamins Team - 2018</p>
+        </div>
+    </div>
+    <!-- /.container -->
+
 
     <!-- scripts -->
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  </body>
+</body>
+
 </html>

@@ -33,6 +33,7 @@ def flash_errors(form):
             ), 'info')
 
 
+
 ################
 #### routes ####
 ################
@@ -40,6 +41,43 @@ def flash_errors(form):
 @vitamins_blueprint.route('/')
 def home_page():
     return render_template('home_page.html')
+
+@vitamins_blueprint.route('/vitamins/<target_area>')
+def all_vitamins(target_area='All'):
+    if target_area in ['hips', 'back', 'shoulders', 'abs']:
+        my_vitamins = Vitamin.query.filter((Vitamin.target_area == target_area))
+        return render_template('all_vitamins.html', user_vitamins=my_vitamins, target_area=target_area)
+    elif target_area == 'All':
+        my_vitamins = Vitamin.query()
+        return render_template('all_vitamins.html', user_vitamins=my_vitamins, target_area=target_area)
+    else:
+        flash('ERROR! Invalid target area selected.', 'error')
+
+    return redirect(url_for('vitamins.public_vitamins'))
+
+
+@vitamins_blueprint.route('/vitamin/<vitamin_id>')
+def vitamin_details(recipe_id):
+    
+    vitamin = Recipe.query.filter_by(id=vitamin_id).first_or_404()
+    return render_template('vitamin_detail.html', vitamin=vitamin)
+  
+  
+@users_blueprint.route('/movement_screenings')
+@login_required
+def admin_view_users():
+    if current_user.role != 'admin':
+        abort(403)
+    else:
+        users = User.query.order_by(User.id).all()
+        return render_template('movement_screenings.html', users=users)
+    return redirect(url_for('users.login'))
+
+
+@vitamins_blueprint.route('/abc')
+def public_vitamins2():
+    return '<h1>Hello world!</h1>'
+
 
 
 @vitamins_blueprint.route('/edit/<vitamin_id>', methods=['GET', 'POST'])
@@ -133,14 +171,6 @@ def edit_vitamin(vitamin_id):
     '''
     return "To be completed"
 
-@users_blueprint.route('/movement_screenings')
-@login_required
-def admin_view_users():
-    if current_user.role != 'admin':
-        abort(403)
-    else:
-        users = User.query.order_by(User.id).all()
-        return render_template('movement_screenings.html', users=users)
-    return redirect(url_for('users.login'))
+
 
 
