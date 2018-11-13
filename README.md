@@ -52,11 +52,11 @@ In the top-level folder:
 
 ## TODO
 
- - create models for database in web/project/models.py
- - create a script for creating postgresDB in web/instance/create_db.py
- - change API to give and take user movement vitamin data
- - remove recipe templates and add in davids templates
- - create superuser and superuser views (for Cory) (change admin view)
- - change add_recipe to add new user (for cory)
- - have Justin create banners for site header and logo
+ - create models for database in web/project/models.py (done)
+ - create a script for creating postgresDB in web/instance/create_db.py (done)
+ - change API to give and take user movement vitamin data (done)
+ - remove recipe templates and add in davids templates (done)
+ - create superuser and superuser views (for Cory) (change admin view) 
+ - banners for site 
+ - thumbnails for youtube api
  
