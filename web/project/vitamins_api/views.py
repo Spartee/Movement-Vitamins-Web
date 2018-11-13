@@ -104,17 +104,17 @@ def get_auth_token():
 
 
 @vitamins_api_blueprint.route('/api/v1/vitamins', methods=['GET'])
-def api1_2_get_all_vitamins():
+def api_1_get_all_vitamins():
     return jsonify({'vitamins': [vitamin.get_url() for vitamin in Vitamin.query.all()]})
 
 
 @vitamins_api_blueprint.route('/api/v1/vitamins/<int:vitamin_id>', methods=['GET'])
-def api1_2_get_vitamin(vitamin_id):
+def api_1_get_vitamin(vitamin_id):
     return jsonify(Vitamin.query.get_or_404(vitamin_id).export_data())
 
 
 @vitamins_api_blueprint.route('/api/v1/vitamins', methods=['POST'])
-def api1_2_create_vitamin():
+def api_1_create_vitamin():
     new_vitamin = Vitamin()
     new_vitamin.import_data(request)
     db.session.add(new_vitamin)
@@ -123,7 +123,7 @@ def api1_2_create_vitamin():
 
 
 @vitamins_api_blueprint.route('/api/v1/vitamins/<int:vitamin_id>', methods=['PUT'])
-def api1_2_update_vitamin(vitamin_id):
+def api_1_update_vitamin(vitamin_id):
     vitamin = Vitamin.query.get_or_404(vitamin_id)
     vitamin.import_data(request)
     db.session.add(vitamin)
@@ -132,7 +132,7 @@ def api1_2_update_vitamin(vitamin_id):
 
 
 @vitamins_api_blueprint.route('/api/v1/vitamins/<int:vitamin_id>', methods=['DELETE'])
-def api1_2_delete_vitamin(vitamin_id):
+def api_1_delete_vitamin(vitamin_id):
     vitamin = Vitamin.query.get_or_404(vitamin_id)
     db.session.delete(vitamin)
     db.session.commit()

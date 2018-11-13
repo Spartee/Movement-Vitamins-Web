@@ -1,4 +1,4 @@
-# project/recipes_api/views.py
+# project/vitamins_api/views.py
 
 #################
 #### imports ####

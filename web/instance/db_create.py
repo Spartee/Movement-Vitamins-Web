@@ -18,7 +18,7 @@ import pandas as pd
 from os import getcwd
 
 
-path = getcwd() + "/instance/vitamins.csv"
+path = getcwd() + "/instance/MovementVitamins.csv"
 vitamins_db = pd.read_csv(path)
 vitamins = []
 for index, row in vitamins_db.iterrows():

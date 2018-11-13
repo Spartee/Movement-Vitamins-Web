@@ -1,0 +1,30 @@
+{% extends "layout.html" %} {% block content %}
+
+<div class="user-profile">
+    <div class="page-header">
+        <h2>
+            {{ vitamin.name }}
+        </h2>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-6 col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Vitamin Details</div>
+                <div class="panel-body"><b>Description:</b> {{ vitamin.description }}</div>
+                <div class="panel-body"><b>Target Area:</b> {{ vitamin.target_area }}</div>
+                {% if vitamin.mobility %}
+                <div class="panel-body"><b>Mobility Vitamin</b></div>
+                {% else %}
+                <div class="panel-body"><b>Stability Vitamin</b></div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-md-8">
+            {% if vitamin.link %}
+            <img class="center-block img-responsive" src="{{ vitamin.link }}" style="width:600px;height:450px;margin-bottom:10px"> {% endif %}
+        </div>
+    </div>
+</div>` {% endblock %}

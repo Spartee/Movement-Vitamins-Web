@@ -100,12 +100,21 @@ def register():
                 if 'ACCOUNT_SID' in app.config and not app.config['TESTING']:
                     send_new_user_text_message(new_user.email)
                 flash('Thanks for registering!  Please check your email to confirm your email address.', 'success')
-                return redirect(url_for('vitamins.home_page', recipe_type='All'))
+                return redirect(url_for('vitamins.home_page', target_area='All'))
             except IntegrityError:
                 db.session.rollback()
                 flash('ERROR! Email ({}) already exists.'.format(form.email.data), 'error')
     return render_template('register.html', form=form)
 
+@users_blueprint.route('/movement_screenings')
+@login_required
+def admin_view_users():
+    if current_user.role != 'admin':
+        abort(403)
+    else:
+        users = User.query.order_by(User.id).all()
+        return render_template('movement_screenings.html', users=users)
+    return redirect(url_for('users.login'))
 
 @users_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
@@ -121,7 +130,7 @@ def login():
                 db.session.commit()
                 login_user(user)
                 flash('Thanks for logging in, {}'.format(current_user.email))
-                return redirect(url_for('vitamins.home_page', recipe_type='All'))
+                return redirect(url_for('vitamins.home_page', target_area='All'))
             else:
                 flash('ERROR! Incorrect login credentials.', 'error')
     return render_template('login.html', form=form)

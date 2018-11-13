@@ -29,45 +29,47 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-              
-          <a class="navbar-brand" href="{{ url_for('vitamins.home_page') }}">Movement Vitamins</a>
-        </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="recipes-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-              <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">vitamins<span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                      <li><a href="{{ url_for('vitamins.all_vitamins', target_area='shoulder') }}">Shoulder</a></li>
-                      <li><a href="{{ url_for('vitamins.all_vitamins', target_area='hips') }}">Hips</a></li>
-                      <li><a href="{{ url_for('vitamins.all_vitamins', target_area='abs') }}">Abs</a></li>
-                      <li><a href="{{ url_for('vitamins.all_vitamins', target_area='neck') }}">Neck</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="{{ url_for('vitamins.all_vitamins', target_area='All') }}">All vitamins</a></li>
-                  </ul>
-              </li>
-            {% if current_user.is_authenticated %}
-              {% if current_user.role == "admin" %}
-              <li><a href="{{ url_for('vitamins.movement_screenings_admin') }}">Movement Screenings</a></li>
-              {% else %}
-              <li><a href="{{ url_for('vitamins.movement_screening') }}">Movement Screening</a></li>
-              {% endif %}
-            {% else %}
-              <li><a href="{{ url_for('users.register') }}">Register</a></li>
-              <li><a href="{{ url_for('users.login') }}">Log In</a></li>
-            {% endif %}
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            {% if current_user.is_authenticated %}
-              <li><a href="{{ url_for('users.user_profile') }}">User Profile</a></li>
-              <li><a href="{{ url_for('users.logout') }}">Log Out</a></li>
-            {% else %}
-              <li><a href="#">Welcome!</a></li>
-            {% endif %}
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div><!-- /.container -->
+                <a class="navbar-brand" href="{{ url_for('vitamins.home_page') }}">Movement Vitamins</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="vitamins-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">vitamins<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('vitamins.all_vitamins', target_area='Shoulder Flextion') }}">Shoulder Flextion</a></li>
+                            <li><a href="{{ url_for('vitamins.all_vitamins', target_area='Shoulder Rotation') }}">Shoulder Rotation</a></li>
+                            <li><a href="{{ url_for('vitamins.all_vitamins', target_area='Hips') }}">Hips</a></li>
+                            <li><a href="{{ url_for('vitamins.all_vitamins', target_area='Foot/Ankle') }}">Foot/Ankle</a></li>
+                            <li><a href="{{ url_for('vitamins.all_vitamins', target_area='Ankle') }}">Ankle</a></li>
+                            <li><a href="{{ url_for('vitamins.all_vitamins', target_area='Upper Body') }}">Upper Body</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ url_for('vitamins.all_vitamins', target_area='All') }}">All vitamins</a></li>
+                        </ul>
+                    </li>
+                    {% if current_user.is_authenticated %} {% if current_user.role == "admin" %}
+                    <li><a href="{{ url_for('users.admin_view_users') }}">Movement Screenings</a></li>
+                    <!-- {% else %} 
+              <li><a href="{{ url_for('vitamins.movement_screening') }}">Movement Screening</a></li> -->
+                    {% endif %} {% else %}
+                    <li><a href="{{ url_for('users.register') }}">Register</a></li>
+                    <li><a href="{{ url_for('users.login') }}">Log In</a></li>
+                    {% endif %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('users.user_profile') }}">User Profile</a></li>
+                    <li><a href="{{ url_for('users.logout') }}">Log Out</a></li>
+                    {% else %}
+                    <li><a href="#">Welcome!</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+        <!-- /.container -->
     </nav>
 
     <div class="container">
@@ -85,7 +87,7 @@
             <!--
         {% for debug_message in get_flashed_messages(category_filter=["debug"]) %}
           <div class="alert alert-info alert-dismissible">{{ debug_message }}</div>
-        {% endfor %}
+        {% endfor %} -->
             <!-- child template -->
             {% block content %} {% endblock %}
 

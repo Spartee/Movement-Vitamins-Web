@@ -45,6 +45,9 @@ class Vitamin(db.Model):
                                                             self.name,
                                                             self.description)
 
+    def get_url(self):
+        return url_for('vitamins_api.api_1_get_vitamin', vitamin_id=self.id, _external=True)
+
 
 class Screening(db.Model):
 
@@ -78,8 +81,6 @@ class Screening(db.Model):
     def __repr__(self):
         return '<id: {}, user_id: {}>'.format(self.id, self.user_id)
 
-    def get_url(self):
-        return url_for('recipes_api.api1_2_get_recipe', recipe_id=self.id, _external=True)
 
     def export_data(self):
         return {
