@@ -14,9 +14,9 @@ from itsdangerous import URLSafeTimedSerializer
 from datetime import datetime
 from twilio.rest import TwilioRestClient
 
-from .forms import RegisterForm, LoginForm, EmailForm, PasswordForm
+from .forms import RegisterForm, LoginForm, EmailForm, PasswordForm, NewScreening
 from project import db, mail, app
-from project.models import User
+from project.models import User, Screening
 
 
 ################
@@ -81,9 +81,50 @@ def send_password_reset_email(user_email):
     send_email('Password Reset Requested', [user_email], html)
 
 
-################
-#### routes ####
-################
+##########################
+#### Screening routes ####
+##########################
+
+@users_blueprint.route('/movement_screenings')
+@login_required
+def admin_view_users():
+    if current_user.role != 'admin':
+        abort(403)
+    else:
+        users = User.query.order_by(User.id).all()
+        return render_template('movement_screenings.html', users=users)
+    return redirect(url_for('users.login'))
+
+
+@users_blueprint.route('/get_latest_screening')
+def get_latest_screening():
+    pass
+
+
+@users_blueprint.route('/get_all_screenings')
+@login_required
+def get_all_screenings():
+    pass
+
+@users_blueprint.route('/new_screening', methods=['POST', 'GET'])
+def new_screening():
+    form = NewScreening(request.form)
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            user = current_user
+            screening = Screening(user.user_id, form.shoulder_flextion, form.shoulder_rotation,
+                                form.ankle_mobility, form.supine_squat, form.leg_raise, form.overhead_squat,
+                                form.arms_extended_squat, form.foot_collapse)
+            db.session.add(screening)
+            db.session.commit()
+            flash("Your new screening has been recorded! Thanks!", 'success')
+    else:
+        return render_template('movement_screening.html', form=form)
+
+
+#####################
+#### User routes ####
+#####################
 
 @users_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
@@ -106,15 +147,7 @@ def register():
                 flash('ERROR! Email ({}) already exists.'.format(form.email.data), 'error')
     return render_template('register.html', form=form)
 
-@users_blueprint.route('/movement_screenings')
-@login_required
-def admin_view_users():
-    if current_user.role != 'admin':
-        abort(403)
-    else:
-        users = User.query.order_by(User.id).all()
-        return render_template('movement_screenings.html', users=users)
-    return redirect(url_for('users.login'))
+
 
 @users_blueprint.route('/login', methods=['GET', 'POST'])
 def login():

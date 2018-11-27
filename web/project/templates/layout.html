@@ -51,8 +51,8 @@
                     </li>
                     {% if current_user.is_authenticated %} {% if current_user.role == "admin" %}
                     <li><a href="{{ url_for('users.admin_view_users') }}">Movement Screenings</a></li>
-                    <!-- {% else %} 
-              <li><a href="{{ url_for('vitamins.movement_screening') }}">Movement Screening</a></li> -->
+                    {% else %}
+                    <li><a href="{{ url_for('users.new_screening') }}">Movement Screening</a></li>
                     {% endif %} {% else %}
                     <li><a href="{{ url_for('users.register') }}">Register</a></li>
                     <li><a href="{{ url_for('users.login') }}">Log In</a></li>

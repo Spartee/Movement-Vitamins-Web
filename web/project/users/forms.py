@@ -2,7 +2,7 @@
 
 
 from flask_wtf import Form
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo, Email
 
 
@@ -23,3 +23,14 @@ class EmailForm(Form):
 
 class PasswordForm(Form):
     password = PasswordField('Password', validators=[DataRequired()])
+
+
+class NewScreening(Form):
+    shoulder_rotation = BooleanField('Shoulder Rotation', default="")
+    shoulder_flexion = BooleanField('Shoulder Flexion', default="")
+    ankle_mobility = BooleanField('Ankle Mobility', default="")
+    supine_squat = BooleanField('Supine Squat', default="")
+    leg_raise = BooleanField('Leg Raise', default="")
+    overhead_squat = BooleanField('Overhead Squat', default="")
+    arms_extended_squat = BooleanField('Arms Extended Squat', default="")
+    foot_collapse = BooleanField('Foot Collapse', default="")
