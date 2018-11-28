@@ -15,7 +15,7 @@
                 <tr>
                     <td>{{ vitamin.name }}</td>
                     <a href="{{ url_for('vitamins.vitamin_details', vitamin_id=vitamin.id) }}" class="thumbnail">
-                        <iframe src="{{ vitamin.link }}"></iframe>
+                            <img class="media-object" src="{{getYoutubeThumbnailUrl(vitamin.link)}}" style="width:64;height:64px;">
                     </a>
                 </tr>
             </div>

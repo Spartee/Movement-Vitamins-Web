@@ -1,0 +1,3 @@
+from project.youtube_api.youtube_functions import getYoutubeThumbnailUrl
+from project import app
+app.jinja_env.globals.update(getYoutubeThumbnailUrl=getYoutubeThumbnailUrl)
