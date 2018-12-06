@@ -108,16 +108,18 @@ def get_all_screenings():
 
 @users_blueprint.route('/new_screening', methods=['POST', 'GET'])
 def new_screening():
+    #TODO logic for suggested vitamins
     form = NewScreening(request.form)
     if request.method == 'POST':
         if form.validate_on_submit():
             user = current_user
-            screening = Screening(user.user_id, form.shoulder_flextion, form.shoulder_rotation,
-                                form.ankle_mobility, form.supine_squat, form.leg_raise, form.overhead_squat,
-                                form.arms_extended_squat, form.foot_collapse)
+            screening = Screening(user.id, form.shoulder_flexion.data, form.shoulder_rotation.data,
+                                form.ankle_mobility.data, form.supine_squat.data, form.leg_raise.data, form.overhead_squat.data,
+                                form.arms_extended_squat.data, form.foot_collapse.data)
             db.session.add(screening)
             db.session.commit()
-            flash("Your new screening has been recorded! Thanks!", 'success')
+            flash("Your new screening has been recorded! Below are your suggested movement vitamins!", 'success')
+            return redirect(url_for('vitamins.all_vitamins', target_area='All'))
     else:
         return render_template('movement_screening.html', form=form)
 
