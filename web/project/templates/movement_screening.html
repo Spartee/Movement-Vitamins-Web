@@ -11,19 +11,61 @@
 
 
             <div class="form-group row">
-                <legend for="shoulder_rotation" class="col-form-legend col-sm-2">Title</legend>
+                <legend for="shoulder_rotation" class="col-form-legend col-sm-2">Shoulder Flextion</legend>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="shoulder_rotation" name="shoulder_rotation" value=""> {{ render_errors(form.shoulder_rotation) }}
+                    <input type="checkbox" class="form-control" id="shoulder_rotation" name="shoulder_rotation" value=""> {{ render_errors(form.shoulder_rotation) }}
                 </div>
             </div>
 
             <div class="form-group row">
                 <legend for="shoulder_flexion" class="col-form-legend col-sm-2">Description</legend>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="shoulder_flexion" name="shoulder_flexion" value=""> {{ render_errors(form.shoulder_flexion) }}
+                    <input type="checkbox" class="form-control" id="shoulder_flexion" name="shoulder_flexion" value=""> {{ render_errors(form.shoulder_flexion) }}
                 </div>
             </div>
 
+            <div class="form-group row">
+                <legend for="ankle_mobility" class="col-form-legend col-sm-2">Ankle Mobility</legend>
+                <div class="col-sm-6">
+                    <input type="checkbox" class="form-control" id="ankle_mobility" name="ankle_mobility" value=""> {{ render_errors(form.ankle_mobility) }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <legend for="supine_squat" class="col-form-legend col-sm-2">Supine Squat</legend>
+                <div class="col-sm-6">
+                    <input type="checkbox" class="form-control" id="supine_squat" name="supine_squat" value=""> {{ render_errors(form.supine_squat) }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <legend for="leg_raise" class="col-form-legend col-sm-2">Leg raise</legend>
+                <div class="col-sm-6">
+                    <input type="checkbox" class="form-control" id="leg_raise" name="leg_raise" value=""> {{ render_errors(form.leg_raise) }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <legend for="overhead_squat" class="col-form-legend col-sm-2">Overhead Squat</legend>
+                <div class="col-sm-6">
+                    <input type="checkbox" class="form-control" id="overhead_squat" name="overhead_squat" value=""> {{ render_errors(form.overhead_squat) }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <legend for="arms_extended_squat" class="col-form-legend col-sm-2">Arms Extended Squat</legend>
+                <div class="col-sm-6">
+                    <input type="checkbox" class="form-control" id="arms_extended_squat" name="arms_extended_squat" value=""> {{ render_errors(form.arms_extended_squat) }}
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <legend for="foot_collapse" class="col-form-legend col-sm-2">Foot Collapse</legend>
+                <div class="col-sm-6">
+                    <input type="checkbox" class="form-control" id="foot_collapse" name="foot_collapse" value=""> {{ render_errors(form.foot_collapse) }}
+                </div>
+            </div>
 
             <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
