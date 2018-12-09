@@ -9,63 +9,77 @@
         <form action="{{ url_for('users.new_screening') }}" method="post" enctype="multipart/form-data">
             {{ form.csrf_token }}
 
+            <style>
+                    .screening_td {
+                       padding-left: 10px;
+                       padding-bottom: 30px;
+                    }
 
-            <div class="form-group row">
-                <legend for="shoulder_flexion" class="col-form-legend col-sm-2">Shoulder Flexion</legend>
-                <div class="col-sm-6">
-                    {{ form.shoulder_flexion}} {{ render_errors(form.shoulder_flexion) }}
-                </div>
-            </div>
+                    .screening_th {
+                       padding-bottom: 30px;
+                    }
 
-            <div class="form-group row">
-                <legend for="shoulder_rotation" class="col-form-legend col-sm-2">Shoulder Rotation</legend>
-                <div class="col-sm-6">
-                    {{ form.shoulder_rotation}} {{ render_errors(form.shoulder_rotation) }}
-                </div>
-            </div>
+                    .screening_label {
+                        font-size:20px;
+                    }
+            </style>
 
-            <div class="form-group row">
-                <legend for="ankle_mobility" class="col-form-legend col-sm-2">Ankle Mobility</legend>
-                <div class="col-sm-6">
-                    {{ form.ankle_mobility }} {{ render_errors(form.ankle_mobility) }}
-                </div>
-            </div>
+            <table>
+                <tr class="screening_tr">
+                    <th class="screening_th"><label class="screening_label" for="shoulder_flexion">Shoulder Flexion</label></th>
+                    {% for subfield in form.shoulder_flexion %}
+                            <td class="screening_td">{{ subfield }} {{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
 
-            <div class="form-group row">
-                <legend for="supine_squat" class="col-form-legend col-sm-2">Supine Squat</legend>
-                <div class="col-sm-6">
-                    {{ form.supine_squat }} {{ render_errors(form.supine_squat) }}
-                </div>
-            </div>
+                <tr class="screening_tr">
+                    <th class="screening_th"><label class="screening_label" class="screening_label" for="shoulder_rotation">Shoulder Rotation</label></th>
+                    {% for subfield in form.shoulder_rotation %}
+                            <td class="screening_td">{{ subfield }} {{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
 
-            <div class="form-group row">
-                <legend for="leg_raise" class="col-form-legend col-sm-2">Active Straight Leg Raise</legend>
-                <div class="col-sm-6">
-                    {{ form.leg_raise }} {{ render_errors(form.leg_raise) }}
-                </div>
-            </div>
+                <tr class="screening_tr">
+                    <th class="screening_th"><label class="screening_label" for="ankle_mobility">Ankle Mobility</label></th>
+                    {% for subfield in form.ankle_mobility %}
+                            <td class="screening_td">{{ subfield }} {{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
 
-            <div class="form-group row">
-                <legend for="overhead_squat" class="col-form-legend col-sm-2">Overhead Squat</legend>
-                <div class="col-sm-6">
-                    {{ form.overhead_squat }} {{ render_errors(form.overhead_squat) }}
-                </div>
-            </div>
+                <tr class="screening_tr">
+                    <th class="screening_th"><label class="screening_label" for="supine_squat">Suspine Squat</label></th>
+                    {% for subfield in form.supine_squat %}
+                            <td class="screening_td">{{ subfield }} {{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr class="screening_tr">
+                    <th class="screening_th"><label class="screening_label" for="leg_raise">Active Straight Leg Raise</label></th>
+                    {% for subfield in form.leg_raise %}
+                            <td class="screening_td">{{ subfield }} {{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
 
-            <div class="form-group row">
-                <legend for="arms_extended_squat" class="col-form-legend col-sm-2">Arms Extended Squat</legend>
-                <div class="col-sm-6">
-                    {{ form.arms_extended_squat }} {{ render_errors(form.arms_extended_squat) }}
-                </div>
-            </div>
+                <tr class="screening_tr">
+                    <th class="screening_th"><label class="screening_label" for="overhead_squat">Overhead Squat</label></th>
+                    {% for subfield in form.overhead_squat %}
+                            <td class="screening_td">{{ subfield }} {{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
 
+                <tr class="screening_tr">
+                    <th class="screening_th"><label class="screening_label" for="arms_extended_squat">Arms Extended Squat</label></th>
+                    {% for subfield in form.arms_extended_squat %}
+                            <td class="screening_td">{{ subfield }} {{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
 
-            <div class="form-group row">
-                <legend for="foot_collapse" class="col-form-legend col-sm-2">Foot Collapse</legend>
-                <div class="col-sm-6">
-                    {{ form.foot_collapse }} {{ render_errors(form.foot_collapse) }}
-                </div>
-            </div>
+                <tr class="screening_tr">
+                        <th class="screening_th"><label class="screening_label" for="foot_collapse">Foot Collapse</label></th>
+                        {% for subfield in form.foot_collapse %}
+                                <td class="screening_td">{{ subfield }} {{ subfield.label }}</td>
+                        {% endfor %}
+                    </tr>
+            </table>
 
             <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">

@@ -26,11 +26,11 @@ class PasswordForm(Form):
 
 
 class NewScreening(Form):
-    shoulder_rotation = RadioField('Shoulder Rotation', choices=[("Y", "Y"), ("N", "N"),("L", "L"), ("R", "R")])
-    shoulder_flexion = RadioField('Shoulder Flexion', choices=[("Y", "Y"), ("N", "N"),("L", "L"), ("R", "R")])
-    ankle_mobility = RadioField('Ankle Mobility', choices=[("Y", "Y"), ("N", "N"),("L", "L"), ("R", "R")])
-    supine_squat = RadioField('Supine Squat', choices=[("Y", "Y"), ("N", "N")])
-    leg_raise = RadioField('Leg Raise', choices=[("Y", "Y"), ("N", "N"),("L", "L"), ("R", "R")])
-    overhead_squat = RadioField('Overhead Squat', choices=[("Y", "Y"), ("N", "N")])
-    arms_extended_squat = RadioField('Arms Extended Squat', choices=[("Y", "Y"), ("N", "N")])
-    foot_collapse = RadioField('Foot Collapse', choices=[("Y", "Y"), ("N", "N"),("L", "L"), ("R", "R")])
+    shoulder_rotation = RadioField('Shoulder Rotation', choices=[("Y", "Yes"), ("N", "No"),("L", "Left"), ("R", "Right")], default='N')
+    shoulder_flexion = RadioField('Shoulder Flexion', choices=[("Y", "Yes"), ("N", "No"),("L", "Left"), ("R", "Right")], default='N')
+    ankle_mobility = RadioField('Ankle Mobility', choices=[("Y", "Yes"), ("N", "No"),("L", "Left"), ("R", "Right")], default='N')
+    supine_squat = RadioField('Supine Squat', choices=[("Y", "Yes"), ("N", "No")], default='N')
+    leg_raise = RadioField('Leg Raise', choices=[("Y", "Yes"), ("N", "No"),("L", "Left"), ("R", "Right")], default='N')
+    overhead_squat = RadioField('Overhead Squat', choices=[("Y", "Yes"), ("N", "No")], default='N')
+    arms_extended_squat = RadioField('Arms Extended Squat', choices=[("Y", "Yes"), ("N", "No")], default='N')
+    foot_collapse = RadioField('Foot Collapse', choices=[("Y", "Yes"), ("N", "No"),("L", "Left"), ("R", "Right")], default='Y')
