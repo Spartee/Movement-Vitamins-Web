@@ -5,6 +5,13 @@
         <h2>
             {{ vitamin.name }}
         </h2>
+        <span class="label label-info" style="font-size:10px;">{{vitamin.target_area}}</span>
+        {% if vitamin.mobility %}
+            <span class="label label-success" style="font-size:10px;">Mobility</span>
+        {% endif %}
+        {% if vitamin.stability %}
+            <span class="label label-warning" style="font-size:10px;">Stability</span>
+        {% endif %}
 
     </div>
 
