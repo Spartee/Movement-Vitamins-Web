@@ -67,14 +67,14 @@ class Screening(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    shoulder_rotation = db.Column(db.Boolean, nullable=True)
-    shoulder_flexion = db.Column(db.Boolean, nullable=True)
-    ankle_mobility = db.Column(db.Boolean, nullable=True)
-    supine_squat = db.Column(db.Boolean, nullable=True)
-    leg_raise = db.Column(db.Boolean, nullable=True)
-    overhead_squat = db.Column(db.Boolean, nullable=True)
-    arms_extended_squat = db.Column(db.Boolean, nullable=True)
-    foot_collapse = db.Column(db.Boolean, nullable=True)
+    shoulder_rotation = db.Column(db.String, default="N")
+    shoulder_flexion = db.Column(db.String, default="N")
+    ankle_mobility = db.Column(db.String, default="N")
+    supine_squat = db.Column(db.String, default="N")
+    leg_raise = db.Column(db.String, default="N")
+    overhead_squat = db.Column(db.String, default="N")
+    arms_extended_squat = db.Column(db.String, default="N")
+    foot_collapse = db.Column(db.String, default="Y")
 
     def __init__(self, user_id, shoulder_flextion, shoulder_rotation, ankle_mobility, supine_squat,
                  leg_raise, overhead_squat, arms_extended_squat, foot_collapse):
