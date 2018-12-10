@@ -20,6 +20,14 @@
                 <div class="media-body">
                     <h4 class="media-heading">
                         <a href="{{ url_for('vitamins.vitamin_details',vitamin_id=vitamin.id) }}">{{ vitamin.name }}</a>
+                        <span class="label label-info" style="font-size:10px;">{{vitamin.target_area}}</span>
+                        {% if vitamin.mobility %}
+                            <span class="label label-success" style="font-size:10px;">Mobility</span>
+                        {% endif %}
+                        {% if vitamin.stability %}
+                            <span class="label label-warning" style="font-size:10px;">Stability</span>
+                        {% endif %}
+
                     </h4>
                     {{ vitamin.description }}
                 </div>
