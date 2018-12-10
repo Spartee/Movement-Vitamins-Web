@@ -19,6 +19,7 @@ from project import db, mail, app
 from project.models import User, Screening
 
 
+
 ################
 #### config ####
 ################
@@ -119,7 +120,7 @@ def new_screening():
             db.session.add(screening)
             db.session.commit()
             flash("Your new screening has been recorded! Below are your suggested movement vitamins!", 'success')
-            return redirect(url_for('vitamins.all_vitamins', target_area='All'))
+            return redirect(url_for('vitamins.suggested_vitamins'))
     else:
         return render_template('movement_screening.html', form=form)
 
