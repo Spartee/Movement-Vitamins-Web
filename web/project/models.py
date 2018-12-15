@@ -51,7 +51,7 @@ class Vitamin(db.Model):
     def export_data(self):
         return {
             'name': self.name,
-            'self_url': self.get_url,
+            'self_url': self.get_url(),
             'Mobility': self.mobility,
             'Stability': self.stability,
             'Target Area': self.target_area,
@@ -95,9 +95,8 @@ class Screening(db.Model):
 
     def export_data(self):
         return {
-            'self_url': self.get_url(),
             'shoulder_rotation': self.shoulder_rotation,
-            'shoulder_flextion': self.shoulder_flexion,
+            'shoulder_flexion': self.shoulder_flexion,
             'ankle_mobility': self.ankle_mobility,
             'supine_squat': self.supine_squat,
             'leg_raise': self.leg_raise,
@@ -108,14 +107,14 @@ class Screening(db.Model):
         }
 
     def import_data(self, request):
-        """Import the data for this users vitamins"""
+        """Import the data for this users screening"""
         try:
             json_data = request.get_json()
             self.shoulder_rotation = json_data['shoulder_rotation']
             self.shoulder_flexion = json_data['shoulder_flexion']
             self.ankle_mobility = json_data['ankle_mobility']
             self.foot_collapse = json_data['foot_collapse']
-            self.arms_extended_squat = json_data['arms_overhead_squat']
+            self.arms_extended_squat = json_data['arms_extended_squat']
             self.overhead_squat = json_data['overhead_squat']
             self.leg_raise = json_data['leg_raise']
             self.supine_squat = json_data['supine_squat']

@@ -109,7 +109,6 @@ def get_all_screenings():
 
 @users_blueprint.route('/new_screening', methods=['POST', 'GET'])
 def new_screening():
-    #TODO logic for suggested vitamins
     form = NewScreening(request.form)
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -172,6 +171,7 @@ def login():
     return render_template('login.html', form=form)
 
 
+    
 @users_blueprint.route('/logout')
 @login_required
 def logout():

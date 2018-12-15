@@ -83,7 +83,7 @@ def unauthorized_token():
 ################
 
 @vitamins_api_blueprint.before_request
-@auth_token.login_required
+#@auth_token.login_required
 def before_request():
     """All routes in this blueprint require authentication."""
     pass
@@ -96,11 +96,11 @@ def after_request(rv):
     return rv
 
 
-@app.route('/get-auth-token')
-@auth.login_required
-@no_cache
-def get_auth_token():
-    return jsonify({'token': g.user.generate_auth_token()})
+#@app.route('/get-auth-token')
+#@auth.login_required
+#@no_cache
+#def get_auth_token():
+#    return jsonify({'token': g.user.generate_auth_token()})
 
 
 @vitamins_api_blueprint.route('/api/v1/vitamins', methods=['GET'])

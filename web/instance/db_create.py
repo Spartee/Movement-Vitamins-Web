@@ -34,7 +34,9 @@ db.create_all()
 
 # Insert user data
 user1 = User(email='partees21@gmail.com', plaintext_password='password', role='user')
+user2 = User(email='spartee@haverford.edu', plaintext_password='password', role='admin')
 db.session.add(user1)
+db.session.add(user2)
 
 # Commit the changes for the users
 db.session.commit()
